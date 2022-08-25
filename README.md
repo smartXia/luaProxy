@@ -11,9 +11,5 @@ appids["dwvzflvcgqgkmtqumindtwrylbakozn3"] = ":80/acl/webroot"
 function GetAppidsInfo()
     return appids
 end
+如有任何问题 issue联系  此 项目 lua 主要用来充当注册中心作用（不同项目之间互相调用，极大的利用了docker 多个镜像同时开启多个内部网络端口）,使用docker-composer + nginx + jwt + lua
 
-
-
-
-
-如有任何问题 issue联系  此 项目 lua 主要用来充当注册中心作用（不同项目之间互相调用，极大的利用了docker 多个镜像同时开启多个内部网络端口）
