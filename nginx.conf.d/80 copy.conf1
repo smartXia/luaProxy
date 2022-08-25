@@ -1,0 +1,27 @@
+ server {
+        gzip on;
+        gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+        gzip_min_length 1000;
+        gzip_proxied no-cache no-store private expired auth;
+        server_name localhost;
+        listen 80;
+
+        root /opt/ci123/www/html/webroot;
+
+        location / {
+            index index.html index.php;
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+
+        location ~[^/]\.php(/|$) {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+            include fastcgi_params;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param DOCUMENT_ROOT $document_root;
+        }
+    }

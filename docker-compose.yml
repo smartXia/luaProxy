@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  nginx:
+    image: 18260356308/luaproxy:0.0.1
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./nginx.conf.d/:/usr/local/openresty/nginx/conf/conf.d/
+      - ./lua_file:/usr/local/openresty/nginx/lua_file
+      ## 挂载运行的php文件
+      - /opt/www/html/app:/opt/www/html/

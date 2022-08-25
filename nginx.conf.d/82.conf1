@@ -1,0 +1,21 @@
+
+server {
+    listen 82;
+    server_name localhost;
+    root /opt/www/html/app/webroot;
+    index index index.html index.htm main.php index.php;
+    location / {
+        default_type text/html;
+        set $target_url '';
+        set $md5 '';
+        # content_by_lua_file /usr/local/openresty/nginx/lua_file/proxy.lua;
+        rewrite_by_lua_file /usr/local/openresty/nginx/lua_file/proxy.lua;
+    }
+    #error_page  404              /404.html;
+    # redirect server error pages to the static page /50x.html
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root html;
+    }
+    underscores_in_headers on;
+}

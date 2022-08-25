@@ -1,0 +1,15 @@
+package jwt
+
+import (
+	"fmt"
+)
+func main() {
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcm9tX2FwcGlkIjoib3B5Z3dtZXV0ejZrdDE1dW1hdmx3eXJjanFxb2swbmkiLCJmcm9tX2FwcGtleSI6InRvcG9xd3BpdHRrdnVtYnhvaHdpcms3ZWtjeXdmeGl3IiwiZnJvbV9jaGFubmVsIjoiMiIsImFwcGlkIjoib3B5Z3dtZXV0ejZrdDE1dW1hdmx3eXJjanFxb2swbmkiLCJhcHBrZXkiOiJ0b3BvcXdwaXR0a3Z1bWJ4b2h3aXJrN2VrY3l3ZnhpdyIsImNoYW5uZWwiOiIyIiwiYWxpYXMiOiJkZWZhdWx0IiwiYWNjb3VudF9pZCI6IjI5YWU1OGJhYjAxMWM0NzA1MzBmMDU2MDZlZjI0ZjQ4Iiwic3ViX29yZ19rZXkiOiJzdWJfb3JnX2tleSIsInVzZXJfaW5mbyI6e30sImNhbGxfc3RhY2siOlt7ImFsaWFzIjoiZGVmdWx0IiwiYXBwaWQiOiJvcHlnd21ldXR6Nmt0MTV1bWF2bHd5cmNqcXFvazBuaSIsImFwcGtleSI6InRvcG9xd3BpdHRrdnVtYnhvaHdpcms3ZWtjeXdmeGl3IiwiY2hhbm5lbCI6IjIiLCJ2ZXJzaW9uIjoiMC4wLjAifV0sInN1cGVyX2FjY291bnRfaWQiOiJ4eHh4eHgiLCJleHAiOjE3NDEwODAyMzYsImlhdCI6MTY1NDY4MDIzNiwiaXNzIjoiZGFkM2EzN2FhOWQ1MDY4OGI1MTU3Njk4YWNmZDdhZWUiLCJuYmYiOjE2NTQ2ODAyMzZ9.PiPLfthyli0-J8xcmkf-8AwSFZTG374aWlclgOOT_Ws"
+	parse, err := Parse(token, func(token *Token) (i interface{}, e error) {
+		return token, nil
+	})
+	if err != nil {
+	}
+	claims := parse.Claims.(MapClaims)
+	fmt.Println(claims["call_stack"])
+}

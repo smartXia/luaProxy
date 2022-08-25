@@ -1,0 +1,55 @@
+version: '3.2'
+services:
+  web-service:
+    image: harbor.oneitfarm.com/itfarm-test/sal2000089a2f4572208104tmii3uhk7:0.0.85
+    restart: always
+    ports:
+    - 8080:80
+    environment:
+    - GATEWAY_HOST_SERVICE=kong:http://172.17.0.1:9090
+    - IDG_APPID=47ae1120ed9246f48e1b270eb5670582
+    - IDG_VERSION=0.0.1
+    - MYSQL_DATABASE_DB1_HOST_WRITE=139.9.124.253
+    - MYSQL_DATABASE_DB1_PORT=3306
+    - MYSQL_DATABASE_DB1_NAME=cpdb_admin  
+    - MYSQL_DATABASE_DB1_USERNAME=root
+    - MYSQL_DATABASE_DB1_PASSWORD=root
+    - IDG_SITEUID=cust
+    - PHP71_FPM_ALLOCATABLE_MEMORY=2048
+    - PHP71_FPM_PROCESS_MEMORY_COST=40
+    volumes:
+    - type: bind
+      source: ./2.txt
+      target: /opt/ci123/www/html/webroot/2.txt
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5g"
+        max-file: "50"
+
+  account-service:
+    image: harbor.oneitfarm.com/itfarm-test/sal2000089a2f457220803172zrruhgl:1.1.15
+    restart: always
+    ports:
+    - 8081:80
+    environment:
+    - GATEWAY_HOST_SERVICE=kong:http://172.17.0.1:9090
+    - IDG_APPID=doatnnuotjlwbh6r83jed1m7yvwrps5q
+    - IDG_VERSION=1.1.15
+    - MYSQL_DATABASE_DB1_HOST_WRITE=139.9.124.253
+    - MYSQL_DATABASE_DB1_PORT=3306
+    - MYSQL_DATABASE_DB1_NAME=cpdb_admin
+    - MYSQL_DATABASE_DB1_USERNAME=root
+    - MYSQL_DATABASE_DB1_PASSWORD=root
+    - IDG_SITEUID=cust
+    - IDG_RUNTIME=development
+    volumes:
+    - type: bind
+      source: ./1.txt
+      target: /opt/ci123/www/html/webroot/1.txt
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5g"
+        max-file: "50"                          
